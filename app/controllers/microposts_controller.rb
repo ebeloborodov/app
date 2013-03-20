@@ -1,13 +1,8 @@
 class MicropostsController < ApplicationController
   # GET /microposts
-  # GET /microposts.json
   def index
     @microposts = Micropost.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @microposts }
-    end
   end
 
   # GET /microposts/1
@@ -42,15 +37,11 @@ class MicropostsController < ApplicationController
   def create
     @micropost = Micropost.new(params[:micropost])
 
-    respond_to do |format|
-      if @micropost.save
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully created.' }
-        format.json { render json: @micropost, status: :created, location: @micropost }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @micropost.errors, status: :unprocessable_entity }
-      end
-    end
+	if @micropost.save
+	  redirect_to @micropost, notice: 'Micropost was successfully created.'
+	else
+	  render action: "new"
+	end
   end
 
   # PUT /microposts/1
